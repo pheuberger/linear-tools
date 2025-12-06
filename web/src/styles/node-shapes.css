@@ -1,20 +1,31 @@
 .custom-node {
-  padding: 10px;
-  border-radius: 8px;
-  border: 5px solid;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 3px solid;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  min-width: 180px;
+  max-width: 250px;
 }
 
 .custom-node:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
 /* Hexagon for epics */
 .custom-node.hexagon {
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  padding: 16px;
+  min-width: 200px;
+}
+
+.custom-node.hexagon:hover {
+  transform: translateY(-4px) scale(1.05);
 }
 
 /* Double octagon for external/missing state */
@@ -29,8 +40,14 @@
     0% 70%,
     0% 30%
   );
-  border-width: 8px;
+  border-width: 4px;
   border-style: double;
+  padding: 14px;
+  opacity: 0.85;
+}
+
+.custom-node.octagon:hover {
+  opacity: 1;
 }
 
 .custom-node a {
@@ -40,16 +57,24 @@
 }
 
 .custom-node .node-identifier {
-  font-weight: bold;
-  margin-bottom: 4px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
 }
 
 .custom-node .node-title {
-  font-size: 0.9em;
-  margin-bottom: 4px;
+  font-size: 0.875em;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .custom-node .node-info {
   font-size: 0.75em;
-  opacity: 0.8;
+  opacity: 0.7;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
 }

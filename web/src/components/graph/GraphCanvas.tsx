@@ -7,6 +7,7 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
+import '../../styles/graph-controls.css'
 import { GraphTransformer } from '../../lib/graph-transformer'
 import { GraphLayout } from '../../lib/graph-layout'
 import { CustomNode } from './CustomNode'
