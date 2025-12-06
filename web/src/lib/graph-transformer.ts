@@ -19,7 +19,7 @@ export class GraphTransformer {
     }))
 
     const edges = graphData.edges.map((edge) => ({
-      id: `${edge.source}-${edge.target}`,
+      id: `${edge.source}-${edge.type}-${edge.target}`,
       source: edge.source,
       target: edge.target,
       type: edge.type,
