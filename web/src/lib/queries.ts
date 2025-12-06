@@ -7,6 +7,8 @@ import type {
   Project,
   ProjectsData,
   Projects,
+  Organization,
+  OrganizationData,
 } from '../types/issue'
 
 export async function findRelatedIssues(
@@ -239,5 +241,33 @@ async function findRelatedIssuesPaginated(
   } catch (error) {
     console.error(error)
     return [null, null]
+  }
+}
+
+export async function getOrganization(api: Api): Promise<Organization | null> {
+  try {
+    const data = await api.request<OrganizationData>(
+      `
+      query Organization {
+        organization {
+          id
+          urlKey
+          name
+        }
+      }
+    `,
+      {},
+    )
+
+    if (!data?.organization) {
+      console.error(`Couldn't find organization in response`)
+      console.error(data)
+      return null
+    }
+
+    return data.organization
+  } catch (error) {
+    console.error(error)
+    return null
   }
 }

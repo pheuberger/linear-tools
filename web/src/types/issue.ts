@@ -68,3 +68,13 @@ export type DependenciesData = {
     }
   }
 }
+
+export type Organization = {
+  id: string
+  urlKey: string
+  name: string
+}
+
+export type OrganizationData = {
+  organization?: Organization
+}

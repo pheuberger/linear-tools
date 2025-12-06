@@ -30,10 +30,12 @@ export class GraphDataBuilder {
   private idTitles: Record<string, string> = {}
   private projects: Projects = {}
   private options: GraphOptions
+  private organizationUrlKey: string
 
-  constructor(issues: Issue[], projects: Projects, options: GraphOptions) {
+  constructor(issues: Issue[], projects: Projects, options: GraphOptions, organizationUrlKey: string) {
     this.projects = projects
     this.options = options
+    this.organizationUrlKey = organizationUrlKey
     this.build(issues)
   }
 
@@ -94,7 +96,7 @@ export class GraphDataBuilder {
         estimate: issue.estimate,
         assignee: issue.assignee,
         cycle: issue.cycle,
-        url: `https://linear.app/toucan/issue/${issue.identifier}`,
+        url: `https://linear.app/${this.organizationUrlKey}/issue/${issue.identifier}`,
       },
       style: this.getNodeStyle(issue),
       clusterId,

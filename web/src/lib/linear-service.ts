@@ -1,5 +1,5 @@
 import { GraphQLClient } from './graphql-client'
-import { findRelatedIssues } from './queries'
+import { findRelatedIssues, getOrganization } from './queries'
 import { GraphDataBuilder } from './graph-data-builder'
 import type { GraphOptions, GraphData } from '../types/graph'
 
@@ -16,7 +16,12 @@ export class LinearService {
       options.project
     )
 
-    const builder = new GraphDataBuilder(issues, projects, options)
+    const organization = await getOrganization(this.client)
+    if (!organization) {
+      throw new Error('Failed to fetch organization information')
+    }
+
+    const builder = new GraphDataBuilder(issues, projects, options, organization.urlKey)
     return builder.getGraphData()
   }
 }
