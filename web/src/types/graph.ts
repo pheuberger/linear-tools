@@ -24,6 +24,7 @@ export interface NodeData {
   assignee?: { displayName: string }
   cycle?: { id: string; number: number; name: string }
   url: string
+  isSearchMatch?: boolean
 }
 
 export interface NodeStyle {

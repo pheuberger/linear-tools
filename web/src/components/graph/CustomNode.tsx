@@ -8,6 +8,11 @@ export const CustomNode = memo(({ data }: NodeProps) => {
   const backgroundColor = data.backgroundColor || '#fff'
   const fontColor = data.fontColor || '#000'
 
+  // Fade non-matching nodes when search is active
+  const isSearchMatch = data.isSearchMatch
+  const isSearchActive = isSearchMatch !== undefined
+  const opacity = isSearchActive && !isSearchMatch ? 0.35 : 1
+
   return (
     <div
       style={{
@@ -24,6 +29,8 @@ export const CustomNode = memo(({ data }: NodeProps) => {
         boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.3)',
         boxSizing: 'border-box',
         position: 'relative',
+        opacity: opacity,
+        transition: 'opacity 0.2s ease',
       }}
     >
       <Handle type="target" position={Position.Top} />

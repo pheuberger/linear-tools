@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import ReactFlow, {
   Background,
   Controls,
@@ -10,7 +10,9 @@ import 'reactflow/dist/style.css'
 import '../../styles/graph-controls.css'
 import { GraphTransformer } from '../../lib/graph-transformer'
 import { GraphLayout } from '../../lib/graph-layout'
+import { GraphFilter } from '../../lib/graph-filter'
 import { CustomNode } from './CustomNode'
+import { SearchFilter } from './SearchFilter'
 import type { GraphData } from '../../types/graph'
 
 const nodeTypes = {
@@ -24,27 +26,51 @@ interface GraphCanvasProps {
 }
 
 export function GraphCanvas({ data }: GraphCanvasProps) {
+  const [searchText, setSearchText] = useState('')
+
+  const filteredData = useMemo(
+    () => GraphFilter.filterBySearch(data, searchText),
+    [data, searchText],
+  )
+
   const { nodes: initialNodes, edges: initialEdges } = useMemo(
-    () => GraphTransformer.toReactFlow(data),
-    [data],
+    () => GraphTransformer.toReactFlow(filteredData),
+    [filteredData],
   )
 
   const layoutedNodes = useMemo(() => {
-    if (data.options.clusterBy && data.clusters.length > 0) {
+    if (filteredData.options.clusterBy && filteredData.clusters.length > 0) {
       return GraphLayout.applyClusterLayout(
         initialNodes,
         initialEdges,
-        data.clusters,
+        filteredData.clusters,
       )
     }
     return GraphLayout.applyDagreLayout(initialNodes, initialEdges)
-  }, [initialNodes, initialEdges, data.options.clusterBy, data.clusters])
+  }, [
+    initialNodes,
+    initialEdges,
+    filteredData.options.clusterBy,
+    filteredData.clusters,
+  ])
 
-  const [nodes, , onNodesChange] = useNodesState(layoutedNodes)
-  const [edges, , onEdgesChange] = useEdgesState(initialEdges)
+  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes)
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+
+  // Update nodes and edges when the filtered data changes
+  useEffect(() => {
+    setNodes(layoutedNodes)
+  }, [layoutedNodes, setNodes])
+
+  useEffect(() => {
+    setEdges(initialEdges)
+  }, [initialEdges, setEdges])
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 relative">
+      <div className="absolute top-4 left-4 z-10">
+        <SearchFilter value={searchText} onChange={setSearchText} />
+      </div>
       <ReactFlow
         nodes={nodes}
         edges={edges}
