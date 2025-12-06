@@ -6,17 +6,16 @@ export class GraphTransformer {
     const nodes = graphData.nodes.map((node) => ({
       id: node.id,
       type: node.type,
-      data: node.data,
-      position: { x: 0, y: 0 }, // Will be computed by layout
-      style: {
+      data: {
+        ...node.data,
+        // Pass style data to the custom node component
         backgroundColor: node.style.fillColor,
         borderColor: node.style.borderColor,
-        borderWidth: `${node.style.borderWidth}px`,
-        borderStyle: 'solid',
-        color: node.style.fontColor,
-        width: `${node.style.width * 100}px`,
-        fontSize: `${node.style.fontSize}px`,
+        fontColor: node.style.fontColor,
       },
+      position: { x: 0, y: 0 }, // Will be computed by layout
+      // Don't apply styles to ReactFlow wrapper - let CustomNode handle it
+      style: {},
     }))
 
     const edges = graphData.edges.map((edge) => ({

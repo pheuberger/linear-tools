@@ -1,83 +1,105 @@
-/* Custom styling for ReactFlow controls */
+/* Custom styling for ReactFlow controls - Windows 3.1 style */
 
 .react-flow__controls {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  border-radius: 12px !important;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 0 !important;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border: 2px solid !important;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf !important;
+  background: #c0c0c0 !important;
 }
 
 .react-flow__controls-button {
-  background: white !important;
-  border: none !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-  width: 40px !important;
-  height: 40px !important;
-  transition: all 0.2s ease !important;
+  background: #c0c0c0 !important;
+  border: 2px solid !important;
+  border-color: #ffffff #000000 #000000 #ffffff !important;
+  width: 32px !important;
+  height: 32px !important;
+  transition: none !important;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080 !important;
 }
 
 .react-flow__controls-button:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  color: white !important;
-  transform: scale(1.05);
+  background: #d0d0d0 !important;
+  border-color: #ffffff #000000 #000000 #ffffff !important;
+}
+
+.react-flow__controls-button:active {
+  border-color: #000000 #ffffff #ffffff #000000 !important;
+  box-shadow: inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #808080 !important;
 }
 
 .react-flow__controls-button:last-child {
-  border-bottom: none !important;
+  border-bottom: 2px solid !important;
+  border-color: #ffffff #000000 #000000 #ffffff !important;
 }
 
 .react-flow__controls-button svg {
   fill: currentColor;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
 }
 
 /* MiniMap styling */
 .react-flow__minimap {
-  border-radius: 12px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-radius: 0 !important;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3) !important;
+  border: 2px solid !important;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf !important;
   overflow: hidden;
+  background: #c0c0c0 !important;
 }
 
 .react-flow__minimap-mask {
-  fill: rgba(102, 126, 234, 0.1) !important;
+  fill: rgba(0, 128, 128, 0.2) !important;
 }
 
 .react-flow__minimap-node {
-  fill: #667eea !important;
+  fill: #000080 !important;
   stroke: none !important;
 }
 
 /* Background styling */
 .react-flow__background {
-  background-color: #f8f9fc;
+  background-color: #c0c0c0;
 }
 
 /* Edge styling */
 .react-flow__edge-path {
   stroke-width: 2;
+  stroke: #000 !important;
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
-  stroke: #667eea !important;
+  stroke: #000080 !important;
   stroke-width: 3;
 }
 
 /* Node selection styling */
 .react-flow__node.selected {
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+  box-shadow: 0 0 0 3px #000080 !important;
+}
+
+/* Fix ReactFlow node wrapper to not add extra sizing */
+.react-flow__node-default {
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  width: auto !important;
+  height: auto !important;
 }
 
 /* Handle styling */
 .react-flow__handle {
-  background: #667eea !important;
-  width: 10px !important;
-  height: 10px !important;
-  border: 2px solid white !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  background: #000080 !important;
+  width: 8px !important;
+  height: 8px !important;
+  border: 1px solid #000 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
 .react-flow__handle:hover {
-  transform: scale(1.3);
+  transform: none;
+  background: #0000c0 !important;
 }

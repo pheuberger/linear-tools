@@ -47,14 +47,14 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 fade-in">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
-            <div className="text-lg font-medium text-gray-700">
+      <div className="flex flex-col items-center justify-center min-h-screen scanlines">
+        <div className="win-window p-6">
+          <div className="flex flex-col items-center gap-3">
+            <div className="text-2xl">⌛</div>
+            <div className="text-xs font-bold" style={{ fontFamily: 'MS Sans Serif' }}>
               Loading graph data...
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-xs" style={{ fontFamily: 'MS Sans Serif' }}>
               Fetching issues and building dependencies
             </div>
           </div>
@@ -65,39 +65,31 @@ function App() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full fade-in">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 scanlines">
+        <div className="win-window max-w-md w-full">
+          <div className="win-titlebar">
+            <span>Error - Linear Graph</span>
+            <span>X</span>
+          </div>
+          <div className="p-4">
+            <div className="mb-4 p-3 bg-white border-2" style={{
+              borderColor: 'var(--win3-dark-gray) var(--win3-light-gray) var(--win3-light-gray) var(--win3-dark-gray)'
+            }}>
+              <p className="text-xs mb-2 font-bold" style={{ fontFamily: 'MS Sans Serif' }}>
+                ⚠️ ERROR LOADING GRAPH
+              </p>
+              <p className="text-xs" style={{ fontFamily: 'MS Sans Serif' }}>
+                {error.message}
+              </p>
             </div>
-            <h2 className="text-xl font-bold text-gray-900 mb-2">
-              Error Loading Graph
-            </h2>
-            <p className="text-gray-600 mb-6">{error.message}</p>
-            <div className="flex flex-col gap-2">
+            <div className="flex gap-2 justify-end">
               <button
                 onClick={() => setSelectedProjects(null)}
-                className="w-full py-3 px-6 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 shadow-lg"
+                className="win-btn"
               >
-                Back to Project Selection
+                Back
               </button>
-              <button
-                onClick={clearApiKey}
-                className="w-full py-3 px-6 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200"
-              >
+              <button onClick={clearApiKey} className="win-btn">
                 Clear API Key
               </button>
             </div>
@@ -109,25 +101,13 @@ function App() {
 
   if (!graphData) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 fade-in">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
+      <div className="flex flex-col items-center justify-center min-h-screen scanlines">
+        <div className="win-window p-6">
+          <div className="flex flex-col items-center gap-3">
+            <div className="text-2xl">📁</div>
+            <div className="text-xs font-bold" style={{ fontFamily: 'MS Sans Serif' }}>
+              No data
             </div>
-            <div className="text-lg font-medium text-gray-700">No data</div>
           </div>
         </div>
       </div>
@@ -135,42 +115,25 @@ function App() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-white">
-      <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                />
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">
-                Linear Dependency Graph
-              </h1>
-              <p className="text-sm text-gray-500">
-                {selectedProjects?.join(', ')}
-              </p>
-            </div>
-          </div>
+    <div className="h-screen flex flex-col" style={{ background: 'var(--win3-gray)' }}>
+      <div className="win-titlebar">
+        <div className="flex items-center gap-2">
+          <span className="text-xs">📊</span>
+          <span>Linear Graph - {selectedProjects?.join(', ')}</span>
+        </div>
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setSelectedProjects(null)}
-            className="px-5 py-2.5 text-sm bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200"
+            className="text-xs px-2 hover:bg-blue-800"
+            style={{ fontFamily: 'MS Sans Serif' }}
           >
-            Change Projects
+            Change
           </button>
+          <span>_</span>
+          <span>□</span>
+          <span>X</span>
         </div>
-      </header>
+      </div>
       <GraphCanvas data={graphData} />
     </div>
   )

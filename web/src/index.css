@@ -1,49 +1,125 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #5e6ad2;
-  --color-primary-hover: #4c5fd5;
-  --color-bg-gradient-start: #f8f9fc;
-  --color-bg-gradient-end: #eef1f8;
+  --win3-teal: #008080;
+  --win3-navy: #000080;
+  --win3-gray: #c0c0c0;
+  --win3-light-gray: #dfdfdf;
+  --win3-dark-gray: #808080;
+  --win3-white: #ffffff;
+  --win3-black: #000000;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
+  background: var(--win3-teal);
   min-height: 100vh;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Courier New', monospace;
 }
 
-/* Loading spinner animation */
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* Windows 3.1 button style */
+.win-btn {
+  background: var(--win3-gray);
+  border: 2px solid;
+  border-color: var(--win3-white) var(--win3-black) var(--win3-black) var(--win3-white);
+  padding: 4px 12px;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 var(--win3-light-gray), inset -1px -1px 0 var(--win3-dark-gray);
 }
 
-.animate-spin {
-  animation: spin 1s linear infinite;
+.win-btn:active {
+  border-color: var(--win3-black) var(--win3-white) var(--win3-white) var(--win3-black);
+  box-shadow: inset -1px -1px 0 var(--win3-light-gray), inset 1px 1px 0 var(--win3-dark-gray);
+  padding: 5px 11px 3px 13px;
 }
 
-/* Fade in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.win-btn:disabled {
+  color: var(--win3-dark-gray);
+  text-shadow: 1px 1px 0 var(--win3-white);
+  cursor: default;
 }
 
-.fade-in {
-  animation: fadeIn 0.4s ease-out;
+/* Windows 3.1 window */
+.win-window {
+  background: var(--win3-gray);
+  border: 2px solid;
+  border-color: var(--win3-light-gray) var(--win3-dark-gray) var(--win3-dark-gray) var(--win3-light-gray);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Windows 3.1 titlebar */
+.win-titlebar {
+  background: var(--win3-navy);
+  background: linear-gradient(90deg, var(--win3-navy) 0%, #1084d0 100%);
+  color: var(--win3-white);
+  padding: 2px 4px;
+  font-weight: bold;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Windows 3.1 input */
+.win-input {
+  background: var(--win3-white);
+  border: 2px solid;
+  border-color: var(--win3-dark-gray) var(--win3-light-gray) var(--win3-light-gray) var(--win3-dark-gray);
+  padding: 3px 4px;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+/* Scanlines effect - CRT style */
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 3px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Subtle CRT flicker for scanlines areas only */
+@keyframes subtle-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.99; }
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.02);
+  pointer-events: none;
+  animation: subtle-flicker 0.2s infinite;
 }
